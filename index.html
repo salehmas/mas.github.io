@@ -1,41 +1,377 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مرحبا بكم في موقعي</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to left, #f5f5f5, #e0e0e0);
-      text-align: center;
-      padding: 50px;
-      direction: rtl;
-    }
-    h1 {
-      color: #333;
-    }
-    p {
-      color: #555;
-    }
-    .btn {
-      margin-top: 20px;
-      padding: 12px 24px;
-      background-color: #1976d2;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .btn:hover {
-      background-color: #125aa8;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>قريبًا | MasMods</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* خلفية متحركة عصرية */
+        body {
+            background: linear-gradient(-45deg, #1e3a8a, #3b82f6, #06b6d4, #0284c7);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* شريط الإشعارات الأزرق */
+        .notification-bar {
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .notification-bar p {
+            margin: 0;
+            display: inline-block;
+        }
+
+        .notification-bar i {
+            margin-left: 8px;
+            font-style: normal;
+            font-size: 1.1rem;
+        }
+
+        .close-notification {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: transform 0.2s;
+        }
+
+        .close-notification:hover {
+            transform: scale(1.1);
+        }
+
+        /* شريط التنقل - القائمة في الجهة اليمنى */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 48px;
+            width: 100%;
+            z-index: 1000;
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+            direction: rtl;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #3b82f6;
+        }
+
+        /* زر القائمة للجوال */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #1e3a8a;
+        }
+
+        /* الكرت الرئيسي */
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(5px);
+            padding: 60px 40px;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            animation: fadeInUp 0.8s ease;
+            margin-top: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card h1 {
+            font-size: 55px;
+            margin: 0;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        .card p {
+            font-size: 18px;
+            color: #475569;
+            margin: 20px 0 35px 0;
+            line-height: 1.7;
+        }
+
+        /* الأزرار */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .buttons a:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .buttons a i {
+            font-size: 1.1rem;
+        }
+
+        /* تذييل بسيط */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        /* استجابة للهواتف */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 20px 0 10px;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .navbar {
+                top: 44px;
+                padding: 0.7rem 5%;
+            }
+
+            .card {
+                padding: 40px 25px;
+                margin-top: 110px;
+            }
+
+            .card h1 {
+                font-size: 38px;
+            }
+
+            .card p {
+                font-size: 15px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .buttons a {
+                width: 80%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                margin-top: 100px;
+                padding: 30px 20px;
+            }
+            
+            .card h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>👋 مرحباً بك في موقعي على GitHub Pages</h1>
-  <p>هذا الموقع مستضاف مجانًا باستخدام GitHub Pages.</p>
-  <button class="btn" onclick="alert('شكراً لزيارتك!')">اضغط هنا</button>
+
+    <!-- شريط الإشعارات الأزرق -->
+    <div class="notification-bar" id="notificationBar">
+        <i>🚀</i>
+        <p>نعمل على تحسين الموقع ليكون أفضل لك - قريباً</p>
+        <button class="close-notification" onclick="closeNotification()">✕</button>
+    </div>
+
+    <!-- شريط التنقل - القائمة في الجهة اليمنى -->
+    <nav class="navbar">
+        <div class="logo">MasMods</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" class="active">الرئيسية</a></li>
+          
+        </ul>
+    </nav>
+
+    <!-- الكرت الرئيسي -->
+    <div class="card">
+        <h1>قريبًا</h1>
+        <p>نعمل على تحسين الموقع ليكون أفضل لك ✨</p>
+
+        <div class="buttons">
+            <a href="https://9aleh.com/" target="_blank">
+                <i class="fas fa-globe"></i> الموقع الرسمي
+            </a>
+            <a href="https://t.me/ALMBRMG_ALMHTRF2019" target="_blank">
+                <i class="fab fa-telegram"></i> تيليجرام
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 masmods.com - جميع الحقوق محفوظة</p>
+    </div>
+
+    <script>
+        // إغلاق شريط الإشعارات
+        function closeNotification() {
+            document.getElementById('notificationBar').style.display = 'none';
+        }
+
+        // قائمة التنقل للجوال
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('show');
+        }
+
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    document.getElementById('navLinks').classList.remove('show');
+                }
+            });
+        });
+
+        // منع الافتراضي للروابط الفارغة
+        document.querySelectorAll('.nav-links a[href="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+
 </body>
 </html>
